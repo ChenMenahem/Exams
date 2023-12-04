@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ExamsDL
 {
 
-    public class Relief_UsersService
+    public class Relief_UsersService : IRelief_UsersService
     {
         ExamsContext _Relief = new ExamsContext();
 
@@ -17,9 +17,9 @@ namespace ExamsDL
             _Relief = relief;
         }
 
-        public  List<ReliefUser> GetAllPersonRelief(int userId)
+        public List<ReliefUser> GetAllPersonRelief(int userId)
         {
-            List<ReliefUser> result =  _Relief.ReliefUsers
+            List<ReliefUser> result = _Relief.ReliefUsers
                  .Where(u => u.IdUser == userId)
                  .ToList();
             return result;
@@ -30,18 +30,37 @@ namespace ExamsDL
                  .ToList();
             return result;
         }
+
+        public List<ReliefReason> GetallReliefReason()
+        {
+            List<ReliefReason> result = _Relief.ReliefReasons
+                 .ToList();
+            return result;
+        }
+
+        public bool AddRealif(ReliefUser Reliefuser)
+        {
+            {
+                _Relief.ReliefUsers.Add(Reliefuser);
+                _Relief.SaveChanges();
+                return true;
+            }
+
+        }
     }
-
-
-
-
-
-
-
-
-
-
 }
-    
-     
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
 

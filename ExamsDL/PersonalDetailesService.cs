@@ -9,78 +9,49 @@ namespace ExamsDL
 {
     public class PersonalDetailesService : IPersonalDetailesService
     {
-        ExamsContext _personalDetailsContext = new ExamsContext();
+        ExamsContext _personalDetails = new ExamsContext();
         public PersonalDetailesService(ExamsContext personalDetailsContext)
         {
-            _personalDetailsContext = personalDetailsContext;
+            _personalDetails = personalDetailsContext;
         }
 
-        public  List<PersonalDetaile> GetPersonalDetails()
+        public PersonalDetaile GetAllPersonDetailsById(int iduser)
         {
-            try
+            List<PersonalDetaile> personals = GetAllPersonalDetails();
+            PersonalDetaile currentPersonal = new PersonalDetaile();
+            foreach (var p in personals)
             {
-                List<PersonalDetaile> personalDetails = _personalDetailsContext.PersonalDetailes.ToList();
-                return personalDetails;
-                    }
 
-            catch(Exception ex)
-            {
-                return null;
+                if (p.IdUser == iduser)
+                    currentPersonal = p;
             }
+            return currentPersonal;
 
+        }
+        public List<PersonalDetaile> GetAllPersonalDetails()
+        {
+            List<PersonalDetaile> result = _personalDetails.PersonalDetailes
+                     .ToList();
+            return result;
         }
 
         public bool Add(PersonalDetaile personalDetaile)
+
         {
-            try
-            {
-                _personalDetailsContext.PersonalDetailes.Add(personalDetaile);
-                _personalDetailsContext.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-                throw ex;
-            }
-        }
-        public bool Remove(int Id_user)
-        {
-            try
-            {
-
-                PersonalDetaile currentpersonalDetaile = _personalDetailsContext.PersonalDetailes.SingleOrDefault(item => item.IdUser == Id_user);
-                _personalDetailsContext.PersonalDetailes.Remove(currentpersonalDetaile);
-                _personalDetailsContext.SaveChanges();
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public bool Update(int Id_user)
-        {
-            try
-            {
-
-
-                PersonalDetaile currentpersonalDetaile = _personalDetailsContext.PersonalDetailes.SingleOrDefault(item => item.IdUser == Id_user);
-                _personalDetailsContext.PersonalDetailes.Update(currentpersonalDetaile);
-                _personalDetailsContext.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+            _personalDetails.PersonalDetailes.Add(personalDetaile);
+            _personalDetails.SaveChanges();
+            return true;
         }
 
-        public void Dispose()
+        public bool Update(PersonalDetaile personalDetaile)
+
         {
-            throw new NotImplementedException();
+            _personalDetails.PersonalDetailes.Update(personalDetaile);
+            _personalDetails.SaveChanges();
+            return true;
         }
+
     }
 }
+           
+        

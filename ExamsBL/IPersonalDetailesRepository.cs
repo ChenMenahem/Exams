@@ -5,9 +5,9 @@ namespace ExamsBL
 {
     public interface IPersonalDetailesRepository
     {
-      public  bool AddPersonalDelailes(PersonalDetaile Id_User);
-        List<PersonalDetaile> GetPersonalDelailes();
-        bool RemovePersonalDetailes(int Id_User);
-        bool UpdatePersonalDetailes(int Id_User);
+        bool AddPersonalDelailesBL(PersonalDetaile Id_User);
+        List<PersonalDetaile> GetAllPersonalDetailsBL();
+        PersonalDetaile GetAllPersonDetailsByIdBl(int iduser);
+        bool UpdatePersonalDetailesBL(PersonalDetaile Id_User);
     }
 }

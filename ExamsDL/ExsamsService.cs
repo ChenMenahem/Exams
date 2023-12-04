@@ -13,63 +13,22 @@ namespace ExamsDL
 
         public List<Exam> GetExams()
         {
-            List<Exam> exams = _examsContext.Exams.ToList();
-            return exams;
+            List<Exam> result = _examsContext.Exams
+                 .ToList();
+            return result;
         }
 
-        public bool Add(Exam exams)
+
+
+        public List<Exam> GetAllPersonExams(int Idexam)
         {
-            try
-            {
-
-                _examsContext.Exams.Add(exams);
-                _examsContext.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-                throw ex;
-            }
-        }
-        public bool Remove(int Id_exam)
-        {
-            try
-            {
-
-                Exam currentExam = _examsContext.Exams.SingleOrDefault(item => item.IdExam == Id_exam);
-                _examsContext.Exams.Remove(currentExam);
-                _examsContext.SaveChanges();
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public bool Update(int IdExam)
-        {
-            try
-            {
-
-                Exam currentExam = _examsContext.Exams.SingleOrDefault(item => item.IdExam == IdExam);
-                _examsContext.Exams.Update(currentExam);
-                _examsContext.SaveChanges();
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+            List<Exam> result = _examsContext.Exams
+                 .Where(u => u.IdExam == Idexam)
+                 .ToList();
+            return result;
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
 

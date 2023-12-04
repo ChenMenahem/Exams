@@ -10,7 +10,7 @@ using ExamsDL;
 
 namespace ExamsBL
 {
-    public class ExamsRepository : IExamsRepository1
+    public class ExamsRepository : IExamsRepository
     {
         IExsamsService _ExamsDL;
 
@@ -24,27 +24,18 @@ namespace ExamsBL
             _ExamsDL = new ExsamsService();
         }
 
-        public List<Exam> GetExams()
+        public List<Exam> GetExamsBl()
         {
             List<Exam> exams = _ExamsDL.GetExams();
             return exams;
         }
+        public List<Exam> GetAllPersonExamsBL(int Idexam)
+        {
+            List<Exam> relief = _ExamsDL.GetAllPersonExams(Idexam);
+            return relief;
+        }
 
 
-        public bool AddExams(Exam Id_exam)
-        {
-            bool isAdd = _ExamsDL.Add(Id_exam);
-            return isAdd;
-        }
-        public bool RemoveExam(int Id_exam)
-        {
-            bool isRemoveExam = _ExamsDL.Remove(Id_exam);
-            return isRemoveExam;
-        }
-        public bool UpdateExam(int Id_exam)
-        {
-            bool isUpdateExam = _ExamsDL.Update(Id_exam);
-            return isUpdateExam;
-        }
+
     }
 }

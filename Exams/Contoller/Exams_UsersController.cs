@@ -4,12 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamsDL.Models;
+
+using ExamsBL;
 
 namespace Exams.Contoller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReliefTypesController : ControllerBase
+    public class Exams_UsersController : ControllerBase
     {
     }
 }

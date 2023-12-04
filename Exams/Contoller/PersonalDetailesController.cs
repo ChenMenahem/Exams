@@ -18,36 +18,36 @@ namespace Exams.Contoller
 
 
         [HttpGet]
-        [Route("GePersonalDetails")]
-        public List<PersonalDetaile> GetPersonalDetails()
+        [Route("GetAllPersonalDetails")]
+        public List<PersonalDetaile> GetAllPersonalDetailsBL()
         {
-            return _PersonalDetailsRepository.GetPersonalDelailes();
+            return _PersonalDetailsRepository.GetAllPersonalDetailsBL();
         }
 
-        [HttpPost]
-        [Route("addPersonalDetails")]
-        public bool AddPersonalDetails(PersonalDetaile personalDetaile)
+        [HttpGet]
+        [Route("GetAllPersonDetailsById")]
+        public PersonalDetaile GetAllPersonDetailsByIdBl(int iduser)
         {
-            bool isAddPersonalDetails = _PersonalDetailsRepository.AddPersonalDelailes(personalDetaile);
+            return _PersonalDetailsRepository.GetAllPersonDetailsByIdBl( iduser);
+        }
+
+
+        [HttpPost]
+        [Route("AddPersonalDelailes")]
+        public bool AddPersonalDelailesBL(PersonalDetaile Id_User)
+        {
+            bool isAddPersonalDetails = _PersonalDetailsRepository.AddPersonalDelailesBL(Id_User);
             return isAddPersonalDetails;
 
         }
-        [HttpDelete]
-        [Route("RemovePersonalDetails/{PersonalId}")]
-        public bool RemovePersonalDetails(int PersonalId)
-        {
-
-
-            bool isRemove = _PersonalDetailsRepository.RemovePersonalDetailes(PersonalId);
-            return isRemove;
-        }
+       
 
         [HttpPut]
         [Route("UpdatePersonalDetail/{PersonalId}")]
-        public bool UpdatePersonalDetail(int PersonalId)
+        public bool UpdatePersonalDetailesBL(PersonalDetaile Id_User)
         {
 
-            bool isUpdate = _PersonalDetailsRepository.UpdatePersonalDetailes(PersonalId);
+            bool isUpdate = _PersonalDetailsRepository.UpdatePersonalDetailesBL(Id_User);
             return isUpdate;
         }
     }

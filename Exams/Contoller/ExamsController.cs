@@ -14,43 +14,25 @@ namespace Exams.Contoller
     [ApiController]
     public class ExamsController : ControllerBase
     {
-        IExamsRepository1 _ExamsRepository = new ExamsRepository();
+        IExamsRepository _ExamsRepository = new ExamsRepository();
 
 
         [HttpGet]
         [Route("GetExams")]
-        public List<Exam> GetExams()
+        public List<Exam> GetExamsBl()
         {
-            return _ExamsRepository.GetExams();
+            return _ExamsRepository.GetExamsBl();
         }
 
-        [HttpPost]
-        [Route("addExams")]
-        public bool AddExam(Exam exam)
+        [HttpGet]
+        [Route("GetExamsForUser")]
+        public List<Exam> GetAllExamsForUserBL(int userId)
         {
-            bool isAddExam = _ExamsRepository.AddExams(exam);
-            return isAddExam;
+           
+            return _ExamsRepository.GetAllPersonExamsBL(userId);
 
         }
-        [HttpDelete]
-        [Route("RemoveExam/{ExamId}")]
-        public bool RemoveExam(int Examid)
-        {
-
-
-            bool isRemove = _ExamsRepository.RemoveExam(Examid);
-            return isRemove;
-        }
-
-        [HttpPut]
-        [Route("UpdateExam/{ExamId}")]
-        public bool UpdateExam(int ExamId)
-        {
-
-            bool isUpdate = _ExamsRepository.UpdateExam(ExamId);
-            return isUpdate;
-        }
-
+        
     }
 }
     

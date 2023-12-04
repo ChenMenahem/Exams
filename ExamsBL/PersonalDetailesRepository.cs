@@ -15,26 +15,30 @@ namespace ExamsBL
         {
             _PersonalDetailsDL = PersonalDetailsDL;
         }
-
-
-        public List<PersonalDetaile> GetPersonalDelailes()
+        public PersonalDetailesRepository()
         {
-            List<PersonalDetaile> personalDetailes = _PersonalDetailsDL.GetPersonalDetails();
-            return personalDetailes;
+            _PersonalDetailsDL = new PersonalDetailesService();
+        }
+
+        public PersonalDetaile GetAllPersonDetailsByIdBl(int iduser)
+        {
+            PersonalDetaile currentUser = _PersonalDetailsDL.GetAllPersonDetailsById(iduser);
+            return currentUser;
+        }
+        public List<PersonalDetaile> GetAllPersonalDetailsBL()
+        {
+            List<PersonalDetaile> personalsDetailes = _PersonalDetailsDL.GetAllPersonalDetails();
+            return personalsDetailes;
         }
 
 
-        public bool AddPersonalDelailes(PersonalDetaile Id_User)
+        public bool AddPersonalDelailesBL(PersonalDetaile Id_User)
         {
-            bool isAdd = _PersonalDetailsDL.Add(Id_User);
-            return isAdd;
+            bool isAddPersonalDetails = _PersonalDetailsDL.Add(Id_User);
+            return isAddPersonalDetails;
         }
-        public bool RemovePersonalDetailes(int Id_User)
-        {
-            bool isRemovePersonalDetailes = _PersonalDetailsDL.Remove(Id_User);
-            return isRemovePersonalDetailes;
-        }
-        public bool UpdatePersonalDetailes(int Id_User)
+
+        public bool UpdatePersonalDetailesBL(PersonalDetaile Id_User)
         {
             bool isUpdatePersonalDetailes = _PersonalDetailsDL.Update(Id_User);
             return isUpdatePersonalDetailes;
