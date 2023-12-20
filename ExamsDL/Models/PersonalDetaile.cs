@@ -9,16 +9,16 @@ namespace ExamsDL.Models
     {
         public PersonalDetaile()
         {
-            ExamsUsers = new HashSet<ExamsUser>();
-            ReliefUsers = new HashSet<ReliefUser>();
+            //ExamsUsers = new HashSet<ExamsUser>();
+            //ReliefUsers = new HashSet<ReliefUser>();
         }
 
         public int IdUser { get; set; }
-        public string Id { get; set; }
+        public string IdentityNum { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public string MaritalStatusMaritalStatusMaritalStatus { get; set; }
+        public string MaritalStatus { get; set; }
         public string Gender { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
@@ -28,10 +28,9 @@ namespace ExamsDL.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public string UrlFilesId { get; set; }
-        public string UserEmail { get; set; }
-        public byte[] Password { get; set; }
+        public string UserPassword { get; set; }
 
-        public virtual ICollection<ExamsUser> ExamsUsers { get; set; }
-        public virtual ICollection<ReliefUser> ReliefUsers { get; set; }
+        //public virtual ICollection<ExamsUser> ExamsUsers { get; set; }
+        //public virtual ICollection<ReliefUser> ReliefUsers { get; set; }
     }
 }

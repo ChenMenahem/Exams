@@ -9,34 +9,27 @@ namespace ExamsDL
 {
     public class Exams_UsersService : IExams_UsersService
     {
-        ExamsContext _ExamsUser = new ExamsContext();
+        ExamsContext _ExamsContext = new ExamsContext();
 
 
-        public Exams_UsersService(ExamsContext examsUsers)
-        {
-            _ExamsUser = examsUsers;
-        }
-
-
+       
         public List<ExamsUser> GetAllExamsForUser(int userId)
         {
-            List<ExamsUser> result = _ExamsUser.ExamsUsers
+            List<ExamsUser> result = _ExamsContext.ExamsUsers
                  .Where(u => u.IdUser == userId)
                  .ToList();
             return result;
         }
-        public List<ExamsUser> GetAllExams()
-        {
-            List<ExamsUser> result = _ExamsUser.ExamsUsers
-                     .ToList();
-            return result;
-        }
-        public bool Add(int idUser, int idExam)
+        public bool Add(ExamsUser examsUser)
 
         {
-            _ExamsUser.ExamsUsers.Add(personalDetaile);
-            _ExamsUser.SaveChanges();
+            _ExamsContext.ExamsUsers.Add(examsUser);
+            _ExamsContext.SaveChanges();
             return true;
         }
+
+
+
+
     }
 }

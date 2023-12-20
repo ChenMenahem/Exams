@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExamsDL
 {
@@ -12,43 +13,42 @@ namespace ExamsDL
     {
         ExamsContext _Relief = new ExamsContext();
 
-        public Relief_UsersService(ExamsContext relief)
-        {
-            _Relief = relief;
-        }
 
-        public List<ReliefUser> GetAllPersonRelief(int userId)
+        public async Task<List<ReliefUser>> GetAllPersonRelief(int userId)//מחזירה את כל ההקלות של בן אדם מסויים
         {
-            List<ReliefUser> result = _Relief.ReliefUsers
+            List<ReliefUser> result = await _Relief.ReliefUsers
                  .Where(u => u.IdUser == userId)
-                 .ToList();
+                  .ToListAsync();
             return result;
         }
-        public List<ReliefType> GetAllReliefType()
+        public async Task<List<ReliefType>> GetAllReliefType()
         {
-            List<ReliefType> result = _Relief.ReliefTypes
-                 .ToList();
+            List<ReliefType> result = await _Relief.ReliefTypes
+                 .ToListAsync();
             return result;
         }
 
-        public List<ReliefReason> GetallReliefReason()
+        public async Task<List<ReliefReason>> GetallReliefReason()
         {
-            List<ReliefReason> result = _Relief.ReliefReasons
-                 .ToList();
+            List<ReliefReason> result = await _Relief.ReliefReasons
+                 .ToListAsync();
             return result;
         }
 
-        public bool AddRealif(ReliefUser Reliefuser)
+        public async Task<bool> AddRealif(ReliefUser Reliefuser)
         {
             {
-                _Relief.ReliefUsers.Add(Reliefuser);
+                var Relief = await _Relief.ReliefUsers.AddAsync(Reliefuser);
                 _Relief.SaveChanges();
                 return true;
             }
 
         }
+
+
     }
 }
+
 
 
 

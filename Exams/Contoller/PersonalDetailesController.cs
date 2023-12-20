@@ -16,38 +16,38 @@ namespace Exams.Contoller
     {
         IPersonalDetailesRepository _PersonalDetailsRepository = new PersonalDetailesRepository();
 
-
         [HttpGet]
         [Route("GetAllPersonalDetails")]
-        public List<PersonalDetaile> GetAllPersonalDetailsBL()
+        public async Task<List<PersonalDetaile>> GetAllPersonalDetailsBL()
         {
-            return _PersonalDetailsRepository.GetAllPersonalDetailsBL();
+            return await _PersonalDetailsRepository.GetAllPersonalDetailsBL();
         }
 
         [HttpGet]
         [Route("GetAllPersonDetailsById")]
-        public PersonalDetaile GetAllPersonDetailsByIdBl(int iduser)
+
+        public Task<List<PersonalDetaile>> GetAllPersonDetailsByIdBl(int iduser)
         {
-            return _PersonalDetailsRepository.GetAllPersonDetailsByIdBl( iduser);
+            return  _PersonalDetailsRepository.GetAllPersonDetailsByIdBl( iduser);
         }
 
 
         [HttpPost]
         [Route("AddPersonalDelailes")]
-        public bool AddPersonalDelailesBL(PersonalDetaile Id_User)
+        public async Task<bool> AddPersonalDelailesBL(PersonalDetaile Id_User)
         {
-            bool isAddPersonalDetails = _PersonalDetailsRepository.AddPersonalDelailesBL(Id_User);
+            bool isAddPersonalDetails =await  _PersonalDetailsRepository.AddPersonalDelailesBL(Id_User);
             return isAddPersonalDetails;
 
         }
-       
+
 
         [HttpPut]
         [Route("UpdatePersonalDetail/{PersonalId}")]
-        public bool UpdatePersonalDetailesBL(PersonalDetaile Id_User)
+        public async Task<bool> UpdatePersonalDetailesBL(PersonalDetaile Id_User)
         {
 
-            bool isUpdate = _PersonalDetailsRepository.UpdatePersonalDetailesBL(Id_User);
+            bool isUpdate = await _PersonalDetailsRepository.UpdatePersonalDetailesBL(Id_User);
             return isUpdate;
         }
     }

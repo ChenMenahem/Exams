@@ -7,7 +7,7 @@ namespace ExamsDL.Models
 {
     public partial class ExamsUser
     {
-        public int Id { get; set; }
+        public int IdExamUser { get; set; }
         public int IdUser { get; set; }
         public int IdExam { get; set; }
         public string IdFileStudy { get; set; }

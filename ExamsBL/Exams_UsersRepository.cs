@@ -10,11 +10,11 @@ using ExamsDL;
 
 namespace ExamsBL
 {
-    class Exams_UsersRepository 
+    public class Exams_UsersRepository : IExams_UsersRepository
     {
         IExams_UsersService _ExamsUsersDL;
 
-        public Exams_UsersRepository(Exams_UsersService examUserDL)
+        public Exams_UsersRepository(IExams_UsersService examUserDL)
         {
             _ExamsUsersDL = examUserDL;
         }
@@ -23,16 +23,17 @@ namespace ExamsBL
         {
             _ExamsUsersDL = new Exams_UsersService();
         }
-        public List<ExamsUser> GetAllExamsBL()
-        {
-            List<ExamsUser> ExamsUser = _ExamsUsersDL.GetAllExams();
-            return ExamsUser;
-        }
+
+
         public List<ExamsUser> GetAllExamsForUserBL(int userId)
         {
             List<ExamsUser> ExamsForUser = _ExamsUsersDL.GetAllExamsForUser(userId);
             return ExamsForUser;
         }
-
+        public bool Add(ExamsUser examsUser)
+        {
+            bool isAdd = _ExamsUsersDL.Add(examsUser);
+            return isAdd;
+        }
     }
 }

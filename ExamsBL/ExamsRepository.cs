@@ -14,7 +14,7 @@ namespace ExamsBL
     {
         IExsamsService _ExamsDL;
 
-        public ExamsRepository(ExsamsService examDL)
+        public ExamsRepository(IExsamsService examDL)
         {
             _ExamsDL = examDL;
         }
@@ -24,14 +24,14 @@ namespace ExamsBL
             _ExamsDL = new ExsamsService();
         }
 
-        public List<Exam> GetExamsBl()
+        public async Task<List<Exam>> GetExamsBl()
         {
-            List<Exam> exams = _ExamsDL.GetExams();
+            List<Exam> exams =  await _ExamsDL.GetExams();
             return exams;
         }
-        public List<Exam> GetAllPersonExamsBL(int Idexam)
+        public async Task<List<Exam>> GetAllPersonExamsBL(int Idexam)
         {
-            List<Exam> relief = _ExamsDL.GetAllPersonExams(Idexam);
+            List<Exam> relief =await _ExamsDL.GetAllPersonExams(Idexam);
             return relief;
         }
 

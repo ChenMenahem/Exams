@@ -13,10 +13,11 @@ namespace ExamsBL
     {
         IRelief_UsersService _ReliefDL;
 
-        public Relief_UsersRepository(Relief_UsersService ReliefDL)
+        public Relief_UsersRepository(IRelief_UsersService reliefDL)
         {
-            _ReliefDL = ReliefDL;
+            _ReliefDL = reliefDL;
         }
+
 
         public Relief_UsersRepository()
         {
@@ -24,24 +25,24 @@ namespace ExamsBL
         }
 
 
-        public List<ReliefUser> GetAllPersonReliefBL(int userId)
+        public async Task<List<ReliefUser>> GetAllPersonReliefBL(int userId)
         {
-            List<ReliefUser> relief = _ReliefDL.GetAllPersonRelief(userId);
+            List<ReliefUser> relief =await _ReliefDL.GetAllPersonRelief(userId);
             return relief;
         }
-        public List<ReliefType> GetAllReliefTypeBL()
+        public async Task<List<ReliefType>> GetAllReliefTypeBL()
         {
-            List<ReliefType> reliefType = _ReliefDL.GetAllReliefType();
+            List<ReliefType> reliefType =await _ReliefDL.GetAllReliefType();
             return reliefType;
         }
-        public List<ReliefReason> GetallReliefReasonBL()
+        public async Task<List<ReliefReason>> GetallReliefReasonBL()
         {
-            List<ReliefReason> reliefReason = _ReliefDL.GetallReliefReason();
+            List<ReliefReason> reliefReason =await _ReliefDL.GetallReliefReason();
             return reliefReason;
         }
-        public bool AddRealif_UserBL(ReliefUser Reliefuser)
+        public async Task<bool> AddRealif_UserBL(ReliefUser Reliefuser)
         {
-            bool isAdd = _ReliefDL.AddRealif_User(Reliefuser);
+            bool isAdd =await _ReliefDL.AddRealif(Reliefuser);
             return isAdd;
         }
     }

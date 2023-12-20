@@ -18,28 +18,28 @@ namespace Exams.Contoller
 
         [HttpGet]
         [Route("GetallReliefReason")]
-        public List<ReliefReason> GetallReliefReasonBL()
+        public async Task<List<ReliefReason>> GetallReliefReasonBL()
         {
-            return _IRelief_UsersRepository.GetallReliefReasonBL();
+            return await _IRelief_UsersRepository.GetallReliefReasonBL();
         }
         [HttpGet]
         [Route("GetAllReliefType")]
-        public List<ReliefType> GetAllReliefTypeBL()
+        public async Task<List<ReliefType>> GetAllReliefTypeBL()
         {
-            return _IRelief_UsersRepository.GetAllReliefTypeBL();
+            return await _IRelief_UsersRepository.GetAllReliefTypeBL();
         }
 
         [HttpGet]
         [Route("GetAllPersonRelief")]
-        public List<ReliefUser> GetAllPersonReliefBL(int userId)
+        public async Task<List<ReliefUser>> GetAllPersonReliefBL(int userId)
         {
-            return _IRelief_UsersRepository.GetAllPersonReliefBL(userId);
+            return await _IRelief_UsersRepository.GetAllPersonReliefBL(userId);
         }
         [HttpPost]
         [Route("AddRealif_User")]
-        public bool AddRealif_UserBL(ReliefUser Reliefuser)
+        public async Task<bool> AddRealif_UserBL(ReliefUser Reliefuser)
         {
-            bool isAddPersonalDetails = _IRelief_UsersRepository.AddRealif_UserBL(Reliefuser);
+            bool isAddPersonalDetails =await _IRelief_UsersRepository.AddRealif_UserBL(Reliefuser);
             return isAddPersonalDetails;
         }
     }

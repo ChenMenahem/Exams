@@ -41,7 +41,7 @@ namespace ExamsDL.Models
 
             modelBuilder.Entity<Employee>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -64,9 +64,7 @@ namespace ExamsDL.Models
             {
                 entity.HasKey(e => e.IdExam);
 
-                entity.Property(e => e.IdExam)
-                    .ValueGeneratedNever()
-                    .HasColumnName("Id_exam");
+                entity.Property(e => e.IdExam).HasColumnName("Id_exam");
 
                 entity.Property(e => e.Date).HasColumnType("date");
 
@@ -85,9 +83,11 @@ namespace ExamsDL.Models
 
             modelBuilder.Entity<ExamsUser>(entity =>
             {
+                entity.HasKey(e => e.IdExamUser);
+
                 entity.ToTable("Exams_Users");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.IdExamUser).HasColumnName("Id_examUser");
 
                 entity.Property(e => e.Class).HasMaxLength(30);
 
@@ -112,11 +112,11 @@ namespace ExamsDL.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Exams_Use__Id_Ex__52593CB8");
 
-                entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany(p => p.ExamsUsers)
-                    .HasForeignKey(d => d.IdUser)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Exams_Use__Id_Us__5165187F");
+                //entity.HasOne(d => d.IdUserNavigation)
+                //    .WithMany(p => p.ExamsUsers)
+                //    .HasForeignKey(d => d.IdUser)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK__Exams_Use__Id_Us__5165187F");
             });
 
             modelBuilder.Entity<Permission>(entity =>
@@ -126,9 +126,7 @@ namespace ExamsDL.Models
 
                 entity.ToTable("Permission");
 
-                entity.Property(e => e.IdPermissions)
-                    .ValueGeneratedNever()
-                    .HasColumnName("Id_Permissions");
+                entity.Property(e => e.IdPermissions).HasColumnName("Id_Permissions");
 
                 entity.Property(e => e.PermissionsName)
                     .IsRequired()
@@ -139,9 +137,7 @@ namespace ExamsDL.Models
             {
                 entity.HasKey(e => e.IdUser);
 
-                entity.Property(e => e.IdUser)
-                    .ValueGeneratedNever()
-                    .HasColumnName("Id_user");
+                entity.Property(e => e.IdUser).HasColumnName("Id_user");
 
                 entity.Property(e => e.BirthDate).HasColumnType("date");
 
@@ -161,7 +157,7 @@ namespace ExamsDL.Models
                     .IsRequired()
                     .HasMaxLength(30);
 
-                entity.Property(e => e.Id)
+                entity.Property(e => e.IdentityNum)
                     .IsRequired()
                     .HasMaxLength(50);
 
@@ -169,14 +165,9 @@ namespace ExamsDL.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.MaritalStatusMaritalStatusMaritalStatus)
+                entity.Property(e => e.MaritalStatus)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("MaritalStatus\r\nMaritalStatus\r\nMaritalStatus]]]");
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasMaxLength(10);
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.Phone)
                     .IsRequired()
@@ -191,7 +182,7 @@ namespace ExamsDL.Models
                     .HasMaxLength(20)
                     .HasColumnName("Url_Files_id");
 
-                entity.Property(e => e.UserEmail)
+                entity.Property(e => e.UserPassword)
                     .IsRequired()
                     .HasMaxLength(30);
             });
@@ -200,9 +191,7 @@ namespace ExamsDL.Models
             {
                 entity.HasKey(e => e.IdReliefReasons);
 
-                entity.Property(e => e.IdReliefReasons)
-                    .ValueGeneratedNever()
-                    .HasColumnName("Id_ReliefReasons");
+                entity.Property(e => e.IdReliefReasons).HasColumnName("Id_ReliefReasons");
 
                 entity.Property(e => e.Reasons).HasMaxLength(50);
             });
@@ -211,9 +200,7 @@ namespace ExamsDL.Models
             {
                 entity.HasKey(e => e.IdRelifeTypes);
 
-                entity.Property(e => e.IdRelifeTypes)
-                    .ValueGeneratedNever()
-                    .HasColumnName("Id_RelifeTypes");
+                entity.Property(e => e.IdRelifeTypes).HasColumnName("Id_RelifeTypes");
 
                 entity.Property(e => e.ReliefTypes)
                     .IsRequired()
@@ -222,9 +209,12 @@ namespace ExamsDL.Models
 
             modelBuilder.Entity<ReliefUser>(entity =>
             {
+                entity.HasKey(e => e.IdReliefUser)
+                    .HasName("PK_Relief_users");
+
                 entity.ToTable("Relief_Users");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.IdReliefUser).HasColumnName("Id_reliefUser");
 
                 entity.Property(e => e.IdReliefReasons).HasColumnName("Id_ReliefReasons");
 
@@ -253,11 +243,11 @@ namespace ExamsDL.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Relief_Us__Id_Re__34C8D9D1");
 
-                entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany(p => p.ReliefUsers)
-                    .HasForeignKey(d => d.IdUser)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Relief_Us__Id_Us__534D60F1");
+                //entity.HasOne(d => d.IdUserNavigation)
+                //    .WithMany(p => p.ReliefUsers)
+                //    .HasForeignKey(d => d.IdUser)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK__Relief_Us__Id_Us__534D60F1");
             });
 
             OnModelCreatingPartial(modelBuilder);
