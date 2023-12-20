@@ -1,13 +1,14 @@
 ﻿using ExamsDL.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ExamsDL
 {
     public interface IPersonalDetailesService
     {
-        bool Add(PersonalDetaile personalDetaile);
-        List<PersonalDetaile> GetAllPersonalDetails();
-        PersonalDetaile GetAllPersonDetailsById(int iduser);
-        bool Update(PersonalDetaile personalDetaile);
+        Task<bool> Add(PersonalDetaile personalDetaile);
+        Task<List<PersonalDetaile>> GetAllPersonalDetails();
+        Task<List<PersonalDetaile>> GetAllPersonDetailsById(int iduser);
+        Task<bool> Update(PersonalDetaile personalDetaile);
     }
 }

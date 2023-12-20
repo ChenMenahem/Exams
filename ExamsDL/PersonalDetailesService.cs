@@ -4,54 +4,62 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ExamsDL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExamsDL
 {
     public class PersonalDetailesService : IPersonalDetailesService
     {
         ExamsContext _personalDetails = new ExamsContext();
-        public PersonalDetailesService(ExamsContext personalDetailsContext)
-        {
-            _personalDetails = personalDetailsContext;
-        }
 
-        public PersonalDetaile GetAllPersonDetailsById(int iduser)
-        {
-            List<PersonalDetaile> personals = GetAllPersonalDetails();
-            PersonalDetaile currentPersonal = new PersonalDetaile();
-            foreach (var p in personals)
-            {
 
-                if (p.IdUser == iduser)
-                    currentPersonal = p;
-            }
-            return currentPersonal;
-
-        }
-        public List<PersonalDetaile> GetAllPersonalDetails()
+        public async Task<List<PersonalDetaile>> GetAllPersonDetailsById(int iduser)
         {
-            List<PersonalDetaile> result = _personalDetails.PersonalDetailes
-                     .ToList();
+            List<PersonalDetaile> result = await _personalDetails.PersonalDetailes
+                 .Where(u => u.IdUser == iduser)
+                 .ToListAsync();
             return result;
         }
 
-        public bool Add(PersonalDetaile personalDetaile)
 
+
+        public async Task<List<PersonalDetaile>> GetAllPersonalDetails()
         {
-            _personalDetails.PersonalDetailes.Add(personalDetaile);
-            _personalDetails.SaveChanges();
-            return true;
+            List<PersonalDetaile> result = await _personalDetails.PersonalDetailes
+                     .ToListAsync();
+            return result;
         }
 
-        public bool Update(PersonalDetaile personalDetaile)
+        public async Task<bool> Add(PersonalDetaile personalDetaile)
+        {
+            try { 
+             await _personalDetails.PersonalDetailes.AddAsync(personalDetaile);
+            _personalDetails.SaveChanges();
+            return true;}
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public async Task<bool> Update(PersonalDetaile personalDetaile)
 
         {
-            _personalDetails.PersonalDetailes.Update(personalDetaile);
-            _personalDetails.SaveChanges();
+            PersonalDetaile existingPerson = _personalDetails.PersonalDetailes.FirstOrDefault(x => x.IdUser == personalDetaile.IdUser);
+
+            if (existingPerson != null)
+            {
+                existingPerson.City = personalDetaile.City;
+                 _personalDetails.Update(existingPerson);
+
+                await _personalDetails.SaveChangesAsync();
+            }
+
             return true;
         }
 
     }
 }
-           
-        
+
+

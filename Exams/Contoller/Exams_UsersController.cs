@@ -14,5 +14,24 @@ namespace Exams.Contoller
     [ApiController]
     public class Exams_UsersController : ControllerBase
     {
+        IExams_UsersRepository _Exams_UserRepository = new Exams_UsersRepository();
+
+        [HttpGet]
+        [Route("GetExamsUsersID")]
+        public List<ExamsUser> GetAllExamsForUserBL(int userId)
+        {
+
+            return _Exams_UserRepository.GetAllExamsForUserBL(userId);
+
+        }
+
+        [HttpPost]
+        [Route("AddExamsUser")]
+        public bool Add(ExamsUser Id_User)
+        {
+            bool AddExamUser = _Exams_UserRepository.Add(Id_User);
+            return AddExamUser;
+
+        }
     }
 }

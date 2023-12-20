@@ -1,11 +1,12 @@
 ﻿using ExamsDL.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ExamsBL
 {
     public interface IExamsRepository
     {
-        List<Exam> GetAllPersonExamsBL(int Idexam);
-        List<Exam> GetExamsBl();
+        public Task<List<Exam>> GetExamsBl();
+        public Task<List<Exam>> GetAllPersonExamsBL(int Idexam);
     }
 }

@@ -11,7 +11,7 @@ namespace ExamsBL
     {
         IPersonalDetailesService _PersonalDetailsDL;
 
-        public PersonalDetailesRepository(PersonalDetailesService PersonalDetailsDL)
+        public PersonalDetailesRepository(IPersonalDetailesService PersonalDetailsDL)
         {
             _PersonalDetailsDL = PersonalDetailsDL;
         }
@@ -20,27 +20,27 @@ namespace ExamsBL
             _PersonalDetailsDL = new PersonalDetailesService();
         }
 
-        public PersonalDetaile GetAllPersonDetailsByIdBl(int iduser)
+        public async Task<List<PersonalDetaile>> GetAllPersonDetailsByIdBl(int iduser)
         {
-            PersonalDetaile currentUser = _PersonalDetailsDL.GetAllPersonDetailsById(iduser);
+            List<PersonalDetaile> currentUser = await _PersonalDetailsDL.GetAllPersonDetailsById(iduser);
             return currentUser;
         }
-        public List<PersonalDetaile> GetAllPersonalDetailsBL()
+        public async Task<List<PersonalDetaile>> GetAllPersonalDetailsBL()
         {
-            List<PersonalDetaile> personalsDetailes = _PersonalDetailsDL.GetAllPersonalDetails();
+            List<PersonalDetaile> personalsDetailes = await _PersonalDetailsDL.GetAllPersonalDetails();
             return personalsDetailes;
         }
 
 
-        public bool AddPersonalDelailesBL(PersonalDetaile Id_User)
+        public async Task<bool> AddPersonalDelailesBL(PersonalDetaile Id_User)
         {
-            bool isAddPersonalDetails = _PersonalDetailsDL.Add(Id_User);
+            bool isAddPersonalDetails = await _PersonalDetailsDL.Add(Id_User);
             return isAddPersonalDetails;
         }
 
-        public bool UpdatePersonalDetailesBL(PersonalDetaile Id_User)
+        public async Task<bool> UpdatePersonalDetailesBL(PersonalDetaile Id_User)
         {
-            bool isUpdatePersonalDetailes = _PersonalDetailsDL.Update(Id_User);
+            bool isUpdatePersonalDetailes = await _PersonalDetailsDL.Update(Id_User);
             return isUpdatePersonalDetailes;
         }
     }

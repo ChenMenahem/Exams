@@ -5,8 +5,7 @@ namespace ExamsDL
 {
     public interface IExams_UsersService
     {
-        bool Add(int idUser, int idExam);
-        List<ExamsUser> GetAllExams();
+        bool Add(ExamsUser examsUser);
         List<ExamsUser> GetAllExamsForUser(int userId);
     }
 }

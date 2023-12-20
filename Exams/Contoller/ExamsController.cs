@@ -19,17 +19,17 @@ namespace Exams.Contoller
 
         [HttpGet]
         [Route("GetExams")]
-        public List<Exam> GetExamsBl()
+        public async Task<List<Exam>> GetExamsBl()
         {
-            return _ExamsRepository.GetExamsBl();
+            return await _ExamsRepository.GetExamsBl();
         }
 
         [HttpGet]
         [Route("GetExamsForUser")]
-        public List<Exam> GetAllExamsForUserBL(int userId)
+        public async Task<List<Exam>> GetAllExamsForUserBL(int userId)
         {
            
-            return _ExamsRepository.GetAllPersonExamsBL(userId);
+            return await _ExamsRepository.GetAllPersonExamsBL(userId);
 
         }
         

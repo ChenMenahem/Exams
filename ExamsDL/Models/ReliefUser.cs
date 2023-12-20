@@ -7,7 +7,7 @@ namespace ExamsDL.Models
 {
     public partial class ReliefUser
     {
-        public int Id { get; set; }
+        public int IdReliefUser { get; set; }
         public int IdUser { get; set; }
         public int IdReliefTypes { get; set; }
         public int IdReliefReasons { get; set; }

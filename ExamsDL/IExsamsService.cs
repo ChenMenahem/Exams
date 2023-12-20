@@ -1,11 +1,12 @@
 ﻿using ExamsDL.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ExamsDL
 {
     public interface IExsamsService
     {
-        List<Exam> GetAllPersonExams(int Idexam);
-        List<Exam> GetExams();
+        Task<List<Exam>> GetAllPersonExams(int Idexam);
+        Task<List<Exam>> GetExams();
     }
 }
